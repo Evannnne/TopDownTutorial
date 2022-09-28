@@ -55,5 +55,7 @@ public class PlayerBehaviour : MonoBehaviour
         RaycastHit hit;
         if (Physics.Raycast(ray, out hit, 1000, m_groundMask))
             transform.LookAt(hit.point, Vector3.up);
+
+        m_animator.SetBool("Moving", move != Vector3.zero);
     }
 }

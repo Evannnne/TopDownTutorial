@@ -385,6 +385,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: ZombieModel
       objectReference: {fileID: 0}
+    - target: {fileID: 5866666021909216657, guid: 711895c103ce223459a700a327cb2090,
+        type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 691a2b445ee3a6140bb97eee6412af9a, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 711895c103ce223459a700a327cb2090, type: 3}
 --- !u!4 &650746285 stripped
@@ -558,6 +563,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: PlayerModel
       objectReference: {fileID: 0}
+    - target: {fileID: 5866666021909216657, guid: 23ee67a2b3a0799468adc11ad8ba7b71,
+        type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 1ec6d05f7e909e441922f0df920d963a, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 23ee67a2b3a0799468adc11ad8ba7b71, type: 3}
 --- !u!4 &866568336 stripped

@@ -14,20 +14,29 @@ public class PlayerController : MonoBehaviour
     public float health = 100;
     public float invincibilityPeriod = 5;
 
+    public Transform shootingOrigin;
+
     private float hitTime = -99999999;
 
-    [SerializeField] private Transform m_shootingOrigin;
-    [SerializeField] private Animator m_animator;
-    [SerializeField] private Rigidbody m_rigidbody;
-    [SerializeField] private LayerMask m_groundMask;
-    [SerializeField] private OuchBehaviour m_ouch;
+    private Animator m_animator;
+    private Rigidbody m_rigidbody;
+    private LayerMask m_groundMask;
+    private OuchBehaviour m_ouch;
+
+    private void Awake()
+    {
+        m_animator = GetComponentInChildren<Animator>();
+        m_rigidbody = GetComponentInChildren<Rigidbody>();
+        m_ouch = GetComponentInChildren<OuchBehaviour>();
+        m_groundMask = LayerMask.GetMask("Ground");
+    }
 
     private IEnumerator _Attack()
     {
         yield return new WaitForFixedUpdate();
         RaycastHit hit;
-        Debug.DrawLine(m_shootingOrigin.transform.position, m_shootingOrigin.transform.position + m_shootingOrigin.transform.forward * 100, Color.red, 1);
-        if (Physics.SphereCast(m_shootingOrigin.transform.position, attackRadius, m_shootingOrigin.transform.forward, out hit))
+        Debug.DrawLine(shootingOrigin.transform.position, shootingOrigin.transform.position + shootingOrigin.transform.forward * 100, Color.red, 1);
+        if (Physics.SphereCast(shootingOrigin.transform.position, attackRadius, shootingOrigin.transform.forward, out hit))
         {
             Debug.Log("Hit at " + Time.time);
 
@@ -41,7 +50,7 @@ public class PlayerController : MonoBehaviour
             var rigid = hitGameObject.GetComponent<Rigidbody>();
             if (rigid != null)
             {
-                var direction = (rigid.transform.position - m_shootingOrigin.position).normalized;
+                var direction = (rigid.transform.position - shootingOrigin.position).normalized;
                 rigid.transform.position += direction * attackPushback;
             }
         }
@@ -94,7 +103,6 @@ public class PlayerController : MonoBehaviour
     {
         Attack();
     }
-
     public void FixedUpdate()
     {
         MoveInCardinalDirections();

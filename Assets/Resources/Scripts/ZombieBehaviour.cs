@@ -13,16 +13,24 @@ public class ZombieBehaviour : MonoBehaviour
 
     public float attackDamage = 10;
 
-    [SerializeField] private NavMeshAgent m_agent;
-    [SerializeField] private Animator m_animator;
-    [SerializeField] private Rigidbody m_rigidbody;
-    [SerializeField] private Collider m_collider;
-    [SerializeField] private OuchBehaviour m_ouch;
+    private NavMeshAgent m_agent;
+    private Animator m_animator;
+    private Rigidbody m_rigidbody;
+    private Collider m_collider;
+    private OuchBehaviour m_ouch;
 
     private GameObject m_player;
 
-    public void Start() => m_player = GameObject.Find("Player");
-    public void Update()
+    private void Awake()
+    {
+        m_agent = GetComponentInChildren<NavMeshAgent>();
+        m_animator = GetComponentInChildren<Animator>();
+        m_rigidbody = GetComponentInChildren<Rigidbody>();
+        m_collider = GetComponentInChildren<Collider>();
+        m_ouch = GetComponentInChildren<OuchBehaviour>();
+    }
+    void Start() => m_player = GameObject.Find("Player");
+    void Update()
     {
         if(m_agent.enabled) m_agent.SetDestination(m_player.transform.position);
     }

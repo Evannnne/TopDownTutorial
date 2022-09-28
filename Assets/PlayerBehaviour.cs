@@ -50,5 +50,10 @@ public class PlayerBehaviour : MonoBehaviour
         move *= moveSpeed;
 
         m_rigidbody.MovePosition(m_rigidbody.position + move);
+
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        RaycastHit hit;
+        if (Physics.Raycast(ray, out hit, 1000, m_groundMask))
+            transform.LookAt(hit.point, Vector3.up);
     }
 }

@@ -35,7 +35,18 @@ public class PlayerBehaviour : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if(Input.GetMouseButtonDown(0))
+        {
+            m_animator.SetTrigger("Fire");
+            RaycastHit hit;
+            if(Physics.SphereCast(transform.position, attackRadius, transform.forward, out hit))
+            {
+                GameObject hitGameObject = hit.collider.gameObject;
+                ZombieBehaviour zombie = hitGameObject.GetComponent<ZombieBehaviour>();
+                if(zombie != null)
+                    Destroy(zombie.gameObject);
+            }
+        }
     }
 
     private void FixedUpdate()
